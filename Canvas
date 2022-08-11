@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Canvas
+        </title>
+        <STyle type="text/css">
+                /*canvas{
+                    background-color: rgb(193, 202, 106);
+                }*/
+        </STyle>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="500" height="500">
+                HOLA TU NAVEGADOR NO FUNCIONA
+        </canvas>
+
+        <script>
+            var canvas = document.getElementById('mycanvas');
+            var canvasx = canvas.getContext('2d');
+
+            //Circulo
+            canvasx.beginPath();
+            canvasx.arc(100,100, 100, 0, 2*Math.PI);
+            canvasx.strokeStyle = "red";
+            canvasx.stroke()       
+            
+            canvasx.beginPath();
+            canvasx.arc(350,100, 100, 0, 2*Math.PI);
+            canvasx.fillStyle = "rgb(100,200,100)";
+            canvasx.fill();
+            canvasx.strokeStyle = "black";
+            canvasx.stroke()
+
+            
+            //linea
+            
+            canvasx.moveTo(400,300);
+            canvasx.lineTo(700,500);
+            canvasx.stroke();       
+            
+            //Triangulo
+            
+            canvasx.moveTo(100,100);
+            canvasx.lineTo(70,70);
+            canvasx.lineTo(200,50);
+            canvasx.lineTo(100,100);
+            canvasx.stroke();
+            canvasx.fillStyle = "rgb(0,200,0)";
+            canvasx.fill();       
+            
+            
+            //Rectangulo
+           
+            canvasx.fillStyle = "rgb (200,0,0,0.5)";
+            canvasx.fillRect(10,10,55,50);
+
+            canvasx.fillStyle = "rgb(0,0,200,0.5)";
+            canvasx.fillRect(50,50,55,50);
+
+            canvasx.fillStyle = "rgb(0,200,0,0.5)";
+            canvasx.fillRect(90,90,55,50);
+        </script>
+    </body>
+</html>
