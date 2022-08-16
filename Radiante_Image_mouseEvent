@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Canvas
+        </title>
+        <STyle type="text/css">
+                /*canvas{
+                    background-color: rgb(193, 202, 106);
+                }*/
+        </STyle>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="1000" height="500">
+                HOLA TU NAVEGADOR NO FUNCIONA
+        </canvas>
+
+        <img id="imagen" src="mike.jpg" style="display: none;">
+
+        <script>
+            var canvas = document.getElementById('mycanvas');
+            var canvasx = canvas.getContext('2d');
+
+            var color = "red";
+            //texto
+           canvasx.font="30px Arial";
+            canvasx.fillText("Hello World", 100,150);
+            canvasx.strokeText("Hello World", 100,200);
+            
+            //linea
+            
+            canvasx.moveTo(400,300);
+            canvasx.lineTo(700,500);
+            canvasx.stroke();       
+            
+            //Triangulo
+            
+            canvasx.moveTo(100,100);
+            canvasx.lineTo(70,80);
+            canvasx.lineTo(300,50);
+            canvasx.lineTo(100,100);
+            canvasx.stroke();
+            canvasx.fillStyle = "rgb(0,200,0)";
+            canvasx.fill();       
+            
+            //gradiantes
+            var grd = canvasx.createLinearGradient(0,0,600,0);
+            
+            grd.addColorStop(0,"red");
+            grd.addColorStop(1, "yellow");
+
+            canvasx.fillStyle=grd;
+            canvasx.fillRect(300,160,160,80);
+
+           //rectangulo
+            canvasx.fillStyle= "pink";
+            canvasx.fillRect(50,50,80,40);
+           
+            //radiante circular
+            var grd2 = canvasx.createRadialGradient(75,50,5,90,60,100);
+            grd2.addColorStop(0,"red");
+            grd2.addColorStop(1, "yellow");
+            canvasx.fillStyle= grd2;
+            canvasx.fillRect(0,0,200,200);
+
+
+            //imagen
+            var img = document.getElementById('imagen');
+            canvasx.drawImage(img, 200,100, 80,80);
+
+            canvas.addEventListener('click',function(e){
+                console.log(e)
+            canvasx.beginPath();
+            canvasx.arc(e.offsetX,e.offsetY, 50, 0, 2*Math.PI);
+            canvasx.fillStyle = color;
+            canvasx.fill();
+            canvasx.strokeStyle = "black";
+            canvasx.stroke()
+            })
+
+
+            canvas.addEventListener('mouseover',function(e){
+                console.log(e)
+
+                color = generateRandomColor();
+
+            })
+
+            function generateRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+            }
+
+        </script>
+    </body>
+</html>
