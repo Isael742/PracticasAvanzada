@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Canvas
+        </title>
+        <STyle type="text/css">
+                canvas{
+                    background-color: rgba(49, 51, 47, 0.466);
+                }
+        </STyle>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="1000" height="500">
+                HOLA TU NAVEGADOR NO FUNCIONA
+        </canvas>
+
+        <script>
+            var canvas = document.getElementById('mycanvas');
+            var canvasx = canvas.getContext('2d');
+
+            var color = "red";
+            var fig = "arc";
+            var press = false;
+
+            var super_x = 0, super_y = 0;
+
+            canvas.addEventListener('click',function(e){
+                console.log(e)
+
+                if (fig == 'arc') {
+                    canvasx.beginPath();
+                    canvasx.arc(e.offsetX,e.offsetY, 50, 0, 2*Math.PI);
+                    canvasx.fillStyle = color;
+                    canvasx.fill();
+                    canvasx.strokeStyle = "black";
+                    canvasx.stroke();
+                } else {
+                    canvasx.fillStyle = color;
+                    canvasx.strokeStyle = "black";
+                    canvasx.fillRect(e.offsetX-40,e.offsetY-40,80,80)                   
+                }
+
+            
+            })
+
+
+            canvas.addEventListener('mouseover',function(e){
+                console.log(e)
+
+                color = generateRandomColor();
+
+            })
+
+            function generateRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+            }
+
+            canvas.addEventListener('mouseout', function(e){
+
+                if (fig == 'arc') {
+                    fig = 'rect';
+                } else {
+                    fig = 'arc';
+                }
+            })
+
+
+            canvas.addEventListener('mousemove', function(e){
+                
+
+                if(press == true){
+                canvasx.fillStyle = 'black';
+                canvasx.fillRect(e.offsetX,e.offsetY,10,10)
+                }
+
+
+            })
+
+            canvas.addEventListener('mousedown', function(e){
+
+                press = true;
+
+            })
+
+            canvas.addEventListener('mouseup', function(e){
+
+            press = false;
+
+            })
+
+                document.addEventListener('keydown',function(e) {
+                    console.log(e)
+                    
+                    //arriba
+                    if(e.code == 'KeyW' || e.code == 'ArrowUp'){
+                        super_y -= 10;
+                    }
+
+                    //abajo
+                    if(e.code == 'KeyS' || e.code == 'ArrowDown'){
+                        super_y += 10;
+                    }
+
+                    //izquierda
+                    if(e.code == 'KeyA' || e.code == 'ArrowLeft'){
+                        super_x -= 10;
+                    }
+
+                    //derecha
+                    if(e.code == 'KeyD' || e.code == 'ArrowRight'){
+                        super_x += 10;
+                    }
+
+                    paint();
+                })
+                
+                function paint() {
+                    canvasx.fillStyle = 'gray';
+                    canvasx.fillRect(0,0,1000,500);
+
+                    canvasx.fillStyle = 'red';
+                    canvasx.fillRect(super_x, super_y,30,30)
+                    canvasx.stroke();
+
+                }
+
+        </script>
+    </body>
+</html>
