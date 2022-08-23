@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Canvas
+        </title>
+        <STyle type="text/css">
+                canvas{
+                    background-color: rgba(49, 51, 47, 0.466);
+                }
+        </STyle>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="1000" height="500">
+                HOLA TU NAVEGADOR NO FUNCIONA
+        </canvas>
+
+        <script>
+            var canvas = document.getElementById('mycanvas');
+            var canvasx = canvas.getContext('2d');
+
+            var color = "red";
+            var fig = "arc";
+            var press = false;
+            var player1 = null;
+            var player2 = null;
+            var direccion = 'derecha';
+            var speed = 1;
+            var score = 0;
+
+
+
+            canvas.addEventListener('click',function(e){
+                console.log(e)
+            
+            })
+
+            function generateRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+            }
+
+            document.addEventListener('keydown',function(e) {
+                    console.log(e)
+                    
+                    //arriba
+                    if(e.code == 'KeyW' || e.code == 'ArrowUp'){
+                       // super_y -= 10;
+                       direccion = 'arriba';
+                    }
+
+                    //abajo
+                    if(e.code == 'KeyS' || e.code == 'ArrowDown'){
+                       // super_y += 10;
+                       direccion = 'abajo';
+                    }
+
+                    //izquierda
+                    if(e.code == 'KeyA' || e.code == 'ArrowLeft'){
+                        //super_x -= 10;
+                        direccion = 'izquierda';
+                    }
+
+                    //derecha
+                    if(e.code == 'KeyD' || e.code == 'ArrowRight'){
+                        //super_x += 10;
+                        direccion = 'derecha';
+                    }
+
+                    paint();
+                })
+            
+
+                function run() {
+                    canvas = document.getElementById('mycanvas');
+                    canvasx = canvas.getContext('2d');
+
+                    player1 = new Cuadro(0,100, 50,50, "red");
+                    player2 = new Cuadro(950, 100, 50,50, "blue");
+
+                    paint();
+                }
+
+                function paint() {
+                    window.requestAnimationFrame(paint);
+                    canvasx.fillStyle = 'gray';
+                    canvasx.fillRect(0,0,1000,500);
+
+                    /*canvasx.fillStyle = generateRandomColor();
+                    canvasx.fillRect(super_x, super_y+100,50,50)
+                    canvasx.strokeRect(super_x, super_y+100,50,50);*/
+
+                    player1.pintar(canvasx);
+                    player2.pintar(canvasx);
+
+                    update();
+
+                }
+
+                function update() {
+
+                    //arriba
+                    if(direccion == 'arriba'){
+                       player1.y-=speed;
+
+                       if (player1.y<0) {
+                        player1.y = 500;
+                        }
+                    }
+
+                    //abajo
+                    if(direccion == 'abajo'){
+                       player1.y+=speed;
+
+                       if (player1.y>500) {
+                        player1.y = 0;
+                        }
+
+                    }
+
+                    //izquierda
+                    if(direccion == 'izquierda'){
+                        player1.x-=speed;
+
+                        if (player1.x<0) {
+                        player1.x = 1000;
+                        }
+                        
+                    }
+
+                    //derecha
+                    if(direccion == 'derecha'){
+                        player1.x+=speed;
+
+                        if (player1.x>1000) {
+                        player1.x = 0;
+                        }
+                        
+                    }
+
+                    if (player1.se_tocan(player2)) {
+                        player2.x = getRandomInt(1000);
+                        player2.y = getRandomInt(500);
+
+                        score+=5;
+                        speed+=1;
+                    }
+
+
+                }
+
+                window.requestAnimationFrame = (function () {
+                    return window.requestAnimationFrame ||
+                        window.webkitRequestAnimationFrame ||
+                        window.mozRequestAnimationFrame ||
+                        function (callback) {
+                            window.setTimeout(callback, 17);
+                        };
+                }());
+
+                function Cuadro(x, y, ancho, alto, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.ancho = ancho;
+                    this.alto = alto;
+                    this.color = color;
+
+                    this.pintar = function(canvasx){
+                        canvasx.fillStyle = this.color;
+                        canvasx.fillRect(this.x, this.y+100,this.ancho,this.alto)
+                        canvasx.strokeRect(this.x, this.y+100,this.ancho,this.alto)
+                        
+                    }
+
+                    this.se_tocan = function (target) { 
+
+                        if(this.x < target.x + target.ancho &&
+
+                            this.x + this.ancho > target.x && 
+
+                            this.y < target.y + target.alto && 
+
+                            this.y + this.alto > target.y){
+
+                                return true;
+                                console.log("hola")	
+
+                            }
+                    };
+                }
+
+                window.addEventListener('load', run, false);
+
+                function getRandomInt(max) {
+                    return Math.floor(Math.random() * max);
+                }
+
+
+        </script>
+    </body>
+</html>
