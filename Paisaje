@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Canvas - Paisaje
+        </title>
+        <STyle type="text/css">
+                canvas{
+                    background-color: rgb(131, 182, 223)
+                }
+        </STyle>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="3000" height="2500">
+                HOLA TU NAVEGADOR NO FUNCIONA
+        </canvas>
+
+        <script>
+            var canvas = document.getElementById('mycanvas');
+            var canvasx = canvas.getContext('2d');
+
+            var color = "rgb(247,220,199)";
+            var fig = "arc";
+            var press = false;
+
+            var super_x = 0, super_y = 0;
+
+            canvas.addEventListener('click',function(e){
+                console.log(e)
+            })
+
+
+            //tronco
+            canvasx.fillStyle = "rgb(102, 67, 41)";
+            canvasx.fillRect(2400, 1700, 400, 800)
+            
+            //arbol
+            canvasx.beginPath();
+            canvasx.arc(2600,950, 800, 0, 2*Math.PI);
+            canvasx.fillStyle = "Green";
+            canvasx.fill();
+            canvasx.strokeStyle = "black";
+            canvasx.stroke()
+
+            
+            
+            //manzana 1
+            canvasx.beginPath();
+            canvasx.arc(2677,447, 60, 0, 2*Math.PI);
+            canvasx.fillStyle = "Red";
+            canvasx.fill();
+            canvasx.strokeStyle = "black";
+            canvasx.stroke()
+
+            //manzana 2
+            canvasx.beginPath();
+            canvasx.arc(2162,748, 60, 0, 2*Math.PI);
+            canvasx.fillStyle = "Red";
+            canvasx.fill();
+            canvasx.strokeStyle = "black";
+            canvasx.stroke()
+
+            //manzana 3
+            canvasx.beginPath();
+            canvasx.arc(2546,1177, 60, 0, 2*Math.PI);
+            canvasx.fillStyle = "Red";
+            canvasx.fill();
+            canvasx.strokeStyle = "black";
+            canvasx.stroke()
+
+
+
+            //techo
+            canvasx.moveTo(300, 1470);
+            canvasx.lineTo(984, 706);
+            canvasx.lineTo(1662, 1470);
+            canvasx.lineTo(300, 1470);
+            canvasx.fillStyle = "rgb(98, 32, 22)";
+            canvasx.fill();
+            canvasx.stroke();
+
+
+            //casa
+            canvasx.fillStyle = "rgb(244, 225, 76)";
+            canvasx.fillRect(390, 1465, 1200, 1200)
+
+
+            //ventana
+            canvasx.fillStyle = "Black";
+            canvasx.strokeStyle = "Blue";
+            canvasx.fillRect(520, 1550, 300, 300)
+            canvasx.stroke();
+
+
+            //puerta
+            canvasx.lineWidth = 5;
+            canvasx.moveTo(1122, 2490);
+            canvasx.lineTo(1122, 2114);
+            canvasx.lineTo(1300, 2114);
+            canvasx.lineTo(1300, 2490);
+            canvasx.stroke();
+            canvasx.beginPath();
+            canvasx.arc(1260,2310, 10, 0, 2*Math.PI);
+            canvasx.fillStyle = "Black";
+            canvasx.fill();
+            canvasx.strokeStyle = "black";
+            canvasx.stroke()
+
+            //nubes
+            canvasx.beginPath();
+            canvasx.arc(300,240, 150, 0, 2*Math.PI);
+            canvasx.fillStyle = "White";
+            canvasx.fill();
+            canvasx.beginPath();
+            canvasx.arc(500,240, 150, 0, 2*Math.PI);
+            canvasx.fillStyle = "White";
+            canvasx.fill();
+            canvasx.beginPath();
+            canvasx.arc(700,240, 150, 0, 2*Math.PI);
+            canvasx.fillStyle = "White";
+            canvasx.fill();
+            canvasx.beginPath();
+            canvasx.arc(900,240, 150, 0, 2*Math.PI);
+            canvasx.fillStyle = "White";
+            canvasx.fill();
+            canvasx.beginPath();
+            canvasx.arc(1100,240, 150, 0, 2*Math.PI);
+            canvasx.fillStyle = "White";
+            canvasx.fill();
+            canvasx.beginPath();
+            canvasx.arc(400,440, 150, 0, 2*Math.PI);
+            canvasx.fillStyle = "White";
+            canvasx.fill();
+            canvasx.beginPath();
+            canvasx.arc(600,440, 150, 0, 2*Math.PI);
+            canvasx.fillStyle = "White";
+            canvasx.fill();
+            canvasx.beginPath();
+            canvasx.arc(800,440, 150, 0, 2*Math.PI);
+            canvasx.fillStyle = "White";
+            canvasx.fill();
+            canvasx.beginPath();
+            canvasx.arc(1000,440, 150, 0, 2*Math.PI);
+            canvasx.fillStyle = "White";
+            canvasx.fill();
+            
+        </script>
+    </body>
+</html>
