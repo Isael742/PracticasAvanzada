@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Canvas - Avatar
+        </title>
+        <STyle type="text/css">
+                canvas{
+                    background-color: rgba(49, 51, 47, 0.466);
+                }
+        </STyle>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="2000" height="2500">
+                HOLA TU NAVEGADOR NO FUNCIONA
+        </canvas>
+
+        <script>
+            var canvas = document.getElementById('mycanvas');
+            var canvasx = canvas.getContext('2d');
+
+            var color = "rgb(247,220,199)";
+            var fig = "arc";
+            var press = false;
+
+            var super_x = 0, super_y = 0;
+
+            canvas.addEventListener('click',function(e){
+                console.log(e)
+            })
+
+
+            
+            //brazo derecho
+            canvasx.lineWidth = 5;
+            canvasx.fillStyle = 'white';
+            canvasx.fill();
+            canvasx.moveTo(1270,1100);
+            canvasx.lineTo(1592,1326);
+            canvasx.lineTo(1373,1504);
+            canvasx.lineTo(1349,1450);
+            canvasx.lineTo(1494,1328);
+            canvasx.lineTo(1267,1151);
+            canvasx.stroke();
+
+            canvasx.lineWidth = 5;
+            canvasx.moveTo(878, 1092);
+            canvasx.lineTo(622, 1306);
+            canvasx.lineTo(379, 1157);
+            canvasx.lineTo(360, 1197);
+            canvasx.lineTo(616, 1354);
+            canvasx.lineTo(877, 1143);
+
+
+            //cuerpo
+            canvasx.fillStyle = "white";
+            canvasx.fillRect(880,1060,390,600)
+            
+
+
+            //pantalones
+            canvasx.lineWidth = 10;
+            canvasx.moveTo(889,1657);
+            canvasx.lineTo(1255,1657);
+            canvasx.lineTo(1375,2293);
+            canvasx.lineTo(1306,2293);
+            canvasx.lineTo(1081,1882);
+            canvasx.lineTo(895,2296);
+            canvasx.lineTo(820,2296);
+            canvasx.lineTo(889,1671);
+            canvasx.stroke(); 
+            canvasx.fillStyle = "rgb(238,208,157)";
+            canvasx.fill();
+            
+
+            //Pies/Zapatos
+            canvasx.fillStyle = "black";
+            canvasx.strokeStyle = "black";
+            canvasx.fillRect(700,2296,200,100)
+            canvasx.fillRect(1300,2296,200,100)
+            canvasx.fillRect(1216,820,150,30)
+            
+            //mano 1
+            canvasx.lineWidth = 5;
+            canvasx.beginPath();
+            canvasx.arc(1360,1470, 50, 0, 2*Math.PI);
+            canvasx.fillStyle = color;
+            canvasx.fill();
+            canvasx.stroke();
+
+            //mano 2
+            canvasx.lineWidth = 5;
+            canvasx.beginPath();
+            canvasx.arc(350,1160, 50, 0, 2*Math.PI);
+            canvasx.fillStyle = color;
+            canvasx.fill();
+            canvasx.stroke();
+
+            //cabeza
+            canvasx.beginPath();
+            canvasx.arc(1080,870, 150, 0, 2*Math.PI);
+            canvasx.fillStyle = color;
+            canvasx.fill();
+            canvasx.fillStyle = "rgb(247,220,199)";
+            canvasx.fillRect(990,979,180,100)
+
+             //ojo izquierdo
+            canvasx.beginPath();
+            canvasx.arc(1010,860, 20, 0, 1*Math.PI);
+            canvasx.fillStyle = 'black';
+            canvasx.fill();
+            canvasx.stroke();
+
+            //ojo derecho
+            canvasx.beginPath();
+            canvasx.arc(1100,860, 20, 0, 1*Math.PI);
+            canvasx.fillStyle = 'black';
+            canvasx.fill();
+            canvasx.stroke();
+
+            //boca
+            canvasx.lineWidth = 5;
+            canvasx.moveTo(1014, 933);
+            canvasx.lineTo(1118, 933);
+            canvasx.stroke();
+
+
+            //gorro
+            canvasx.beginPath();
+            canvasx.rotate(180 * Math.PI / 180);
+            canvasx.arc(-1075,-850, 150, 0, 1*Math.PI);
+            canvasx.fillStyle = "black";
+            canvasx.fill();
+            canvasx.stroke();
+            
+
+
+             //cuerpo
+            canvasx.fillStyle = "white";
+            canvasx.fillRect(880,1060,390,600)
+
+
+
+            
+        </script>
+    </body>
+</html>
