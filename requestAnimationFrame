@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Canvas
+        </title>
+        <STyle type="text/css">
+                canvas{
+                    background-color: rgba(49, 51, 47, 0.466);
+                }
+        </STyle>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="1000" height="500">
+                HOLA TU NAVEGADOR NO FUNCIONA
+        </canvas>
+
+        <script>
+            var canvas = document.getElementById('mycanvas');
+            var canvasx = canvas.getContext('2d');
+
+            var color = "red";
+            var fig = "arc";
+            var press = false;
+
+            var super_x = 0, super_y = 0;
+
+
+
+            canvas.addEventListener('click',function(e){
+                console.log(e)
+            
+            })
+
+            function generateRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+            }
+
+            press = false;
+
+            
+
+                function run() {
+                    canvas = document.getElementById('mycanvas');
+                    canvasx = canvas.getContext('2d');
+
+                    paint();
+                }
+
+                function paint() {
+                    window.requestAnimationFrame(paint);
+                    canvasx.fillStyle = 'gray';
+                    canvasx.fillRect(0,0,1000,500);
+
+                    canvasx.fillStyle = generateRandomColor();
+                    canvasx.fillRect(super_x, super_y,30,30)
+                    canvasx.stroke();
+
+                    super_x+=5;
+
+                    if (super_x>=1000) {
+                        super_x = 0;
+                    }
+
+                }
+
+                window.requestAnimationFrame = (function () {
+                    return window.requestAnimationFrame ||
+                        window.webkitRequestAnimationFrame ||
+                        window.mozRequestAnimationFrame ||
+                        function (callback) {
+                            window.setTimeout(callback, 17);
+                        };
+                }());
+
+                window.addEventListener('load', run, false);
+
+
+        </script>
+    </body>
+</html>
