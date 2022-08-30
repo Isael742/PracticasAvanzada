@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            vue js
+        </title>
+        <STyle type="text/css">
+                
+        </STyle>
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+    <body>
+
+        <div id="contenedor">
+            <h1>
+                {{name}}
+            </h1>
+            <h2>
+                {{lastname}}
+            </h2>
+
+            <input type="text" v-model="name" name="">
+            <br>
+            <input type="text" v-model="lastname" name="">
+
+            <br>
+            <br>
+            <button @click="saludar">Click me!</button>
+
+            <hr>
+            <input type="text" v-model="numero1" name="">
+            <br>
+            <input type="text" v-model="numero2" name="">
+            <br>
+            <button @click="Suma">Sumar</button>
+            <br>
+            <h2>
+                {{resultado}}
+            </h2>
+
+            <hr>
+
+            <ol>
+                
+                <li v-for="item in chamecos">
+                    <h4>Nombre:</h4>
+                    {{item.name_chameco}} 
+                    <h4>Rol:</h4>
+                    <span> {{item.role}}</span>
+
+                </li>
+
+            </ol>
+
+            <input type="text" v-model="name_chameco" name="">
+            <input type="text" v-model="role" name="">
+            <button @click="save">Save chameco</button>
+        </div>
+
+        
+
+        <script type="text/javascript">
+            const { createApp } = Vue
+
+            createApp({
+                data(){
+                    return {
+                        name: 'Isael',
+                        lastname:'Cota Verdugo',
+                        numero1:0,
+                        numero2:0,
+                        resultado:0,
+                        edad:0,
+                        chamecos: [],
+                        name_chameco:"",
+                        role:""
+                    }
+                },
+                methods:{
+                    saludar(){
+                        alert('hola ' + this.name + ' ')
+                    },
+                    Suma(){
+                        this.resultado = parseInt(this.numero1) + parseInt(this.numero2)
+                    },
+                    save(){
+                        var persona = {name_chameco:this.name_chameco, role:this.role} 
+                        this.chamecos.push(persona)
+                    }
+                }
+            }).mount('#contenedor')
+
+
+        </script>
+    </body>
+</html>
