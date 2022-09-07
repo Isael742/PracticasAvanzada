@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            vue js
+        </title>
+        <STyle type="text/css">
+                
+        </STyle>
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+    <body>
+        <div id="contenedor">
+                <h1 v-if="mostrar_tabla == true">
+                    Tabla de Usuarios
+                </h1>
+                <br>
+                <button @click="mostrar_formulario_agregar" v-if="mostrar_tabla == true">Agregar</button>
+                <br>
+                <table v-if="mostrar_tabla == true" border="1">
+                    <thead>
+                        <tr>
+                            <td>
+                                ID
+                            </td>
+                            <td>
+                                Nombre
+                            </td>
+                            <td>
+                                Usuario
+                            </td>
+                            <td>
+                                Email
+                            </td>
+                            <td>
+                                Contacto
+                            </td>
+                            <td>
+                                Pagina Web
+                            </td>
+                            <td>
+                                Opciones
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(u,index) in users">
+                            <td>
+                                {{u.id}}
+                            </td>
+                            <td>
+                                {{u.name}}
+                            </td>
+                            <td>
+                                {{u.username}}
+                            </td>
+                            <td>
+                                {{u.email}}
+                            </td>
+                            <td>
+                                {{u.phone}}
+                            </td>
+                            <td>
+                                {{u.website}}
+                            </td>
+                            <td>
+                                <button @click="mostrar_formulario_editar">Editar</button>
+                                <button @click="eliminar">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            <form v-if="mostrar_form1 == true">
+                <h1>
+                    Agregar Usuario
+                </h1>
+                <label>Nombre</label>
+                <input type="name" v-model="name">
+                <label>Usuario</label>
+                <input type="username" v-model="username">
+                <label>Password</label>
+                <input type="password" v-model="password">
+                <label>Email</label>
+                <input type="email" v-model="email">
+                <label>Telefono</label>
+                <input type="phone" v-model="phone">
+                <label>Sitio Web</label>
+                <input type="website" v-model="website">
+                <br>
+                <button @click="add">Guardar</button>
+            </form>
+
+            <form v-if="mostrar_form2 == true">
+                <h1>
+                    Editar Usuario
+                </h1>
+                <label>Nombre</label>
+                <input type="name" v-model="name">
+                <label>Usuario</label>
+                <input type="username" v-model="username">
+                <label>Password</label>
+                <input type="password" v-model="password">
+                <label>Email</label>
+                <input type="email" v-model="email">
+                <label>Telefono</label>
+                <input type="phone" v-model="phone">
+                <label>Sitio Web</label>
+                <input type="website" v-model="website">
+                <br>
+                <button @click="guardar_edicion">Guardar</button>
+            </form>
+
+
+        </div>
+        <script type="text/javascript">
+            const { createApp } = Vue
+            var contador = 11;
+            createApp({
+                data(){
+                    return {
+                        users:[],
+                        name: '',
+                        username: '',
+                        password: '',
+                        email: '',
+                        phone: '',
+                        website: '',
+                        id: 1,
+                        mostrar_tabla: true,
+                        mostrar_form1:false,
+                        mostrar_form2:false,
+                        userIndex: null
+                    }
+                },
+                methods:{
+                    add(e){
+                        this.id = contador;
+                        this.users.push({id: this.id, name: this.name,username: this.username,password: this.password, email: this.email, phone: this.phone, website: this.website});
+                        contador++;
+                        var access=this.users.map(function(u){})
+                        alert("Usuario Guardado")
+                        this.mostrar_tabla = true;
+                        this.mostrar_form1 = false;
+                    },
+                    mostrar_formulario_agregar(){
+                        this.mostrar_tabla = false;
+                        this.mostrar_form1 = true;
+                    },
+                    eliminar(index){
+                        this.users.splice(index, 1);
+                        alert("Usuario Eliminado")
+
+                    },
+                    mostrar_formulario_editar(index){
+                        userIndex = index;
+                        this.mostrar_tabla = false;
+                        this.mostrar_form2 = true;
+                    },
+                    guardar_edicion(index){
+                        this.id=userIndex+1;
+                        this.users[index] = {id: this.id, name: this.name,username: this.username,password: this.password, email: this.email, phone: this.phone, website: this.website};
+                        this.mostrar_tabla = true;
+                        this.mostrar_form2 = false;
+                        alert("Datos del Usuario Editados")
+                    }
+                    
+                },
+                mounted() {
+                    fetch('users.json')
+                    .then((res) => res.json())
+                    .then((json) => (this.users = json))
+                    .catch((err) => console.log(err))
+                },
+            }).mount('#contenedor')
+
+
+        </script>
+    </body>
+</html>

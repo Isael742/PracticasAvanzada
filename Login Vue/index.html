@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css.css" />
+        <title>
+            vue js
+        </title>
+        <STyle type="text/css">
+                
+        </STyle>
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+    <body>
+        <div class="login">
+            <div id="contenedor" class="contenedor">
+            <form>
+                <fieldset>
+                    <legend>
+                        Acceso al panel
+                    </legend>
+                    <label>
+                        Correo
+                    </label>
+                    <input type="email" v-model="email" name="">
+                    <label>
+                        password
+                    </label>
+                    <input type="password" v-model="password" name="">
+
+                    <button @click="login">
+                        Acceder
+                    </button>
+                </fieldset>
+            </form>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            const { createApp } = Vue
+
+            createApp({
+                data(){
+                    return {
+                        users: null,
+                        email: '',
+                        password: ''
+                    }
+                },
+                methods:{
+                    login(e){
+                        e.preventDefault();
+
+                        var email_user = this.email
+                        var pass_user = this.password
+                        
+                        var access = this.users.map(function(u){
+                            console.log(this.email)
+                            console.log(this.password)
+
+                            if(email_user === u.email.toLowerCase()){
+
+                                if (pass_user === u.password) {
+                                    alert("Acceso Concedido")
+                                    return true;
+                                }
+                            }
+                        }) 
+                        console.log(access);
+
+                        if (access.includes(true)) {
+                            window.location.href = "tabla.html";
+                        } else {
+                            alert("Acceso Denegado")
+                        }
+                    }
+                },
+                mounted() {
+                    fetch('users.json')
+                    .then((res) => res.json())
+                    .then((json) => (this.users = json))
+                    .catch((err) => console.log(err))
+                },
+            }).mount('#contenedor')
+
+
+        </script>
+    </body>
+</html>
