@@ -8,110 +8,31 @@
                 
         </STyle>
         <script src="https://unpkg.com/vue@3"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     <body>
         <div id="contenedor">
-                <h1 v-if="mostrar_tabla == true">
-                    Tabla de Usuarios
-                </h1>
+                <h2>
+                    Peliculas Top Rating
+                </h2>
                 <br>
-                <button @click="mostrar_formulario_agregar" v-if="mostrar_tabla == true">Agregar</button>
+                <h3>Bienvenido: </h3>
+                <ul>
+                    <li v-for="item in peliculas">
+                        <h3>{{item.original_title}}</h3>
+                        <br>
+                        <img :src="'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/'+item.poster_path">
+                        <br>
+                        <button @click="acceder_detalles(item)">Detalles</button>
+                        
+
+                        <br>
+                    </li>
+                    <br>
+                </ul>
                 <br>
-                <table v-if="mostrar_tabla == true" border="1">
-                    <thead>
-                        <tr>
-                            <td>
-                                ID
-                            </td>
-                            <td>
-                                Nombre
-                            </td>
-                            <td>
-                                Usuario
-                            </td>
-                            <td>
-                                Email
-                            </td>
-                            <td>
-                                Contacto
-                            </td>
-                            <td>
-                                Pagina Web
-                            </td>
-                            <td>
-                                Opciones
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(u,index) in users">
-                            <td>
-                                {{u.id}}
-                            </td>
-                            <td>
-                                {{u.name}}
-                            </td>
-                            <td>
-                                {{u.username}}
-                            </td>
-                            <td>
-                                {{u.email}}
-                            </td>
-                            <td>
-                                {{u.phone}}
-                            </td>
-                            <td>
-                                {{u.website}}
-                            </td>
-                            <td>
-                                <button @click="mostrar_formulario_editar">Editar</button>
-                                <button @click="eliminar">Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            <form v-if="mostrar_form1 == true">
-                <h1>
-                    Agregar Usuario
-                </h1>
-                <label>Nombre</label>
-                <input type="name" v-model="name">
-                <label>Usuario</label>
-                <input type="username" v-model="username">
-                <label>Password</label>
-                <input type="password" v-model="password">
-                <label>Email</label>
-                <input type="email" v-model="email">
-                <label>Telefono</label>
-                <input type="phone" v-model="phone">
-                <label>Sitio Web</label>
-                <input type="website" v-model="website">
+                <button @click="add">Mostrar Lista de Peliculas</button>
                 <br>
-                <button @click="add">Guardar</button>
-            </form>
-
-            <form v-if="mostrar_form2 == true">
-                <h1>
-                    Editar Usuario
-                </h1>
-                <label>Nombre</label>
-                <input type="name" v-model="name">
-                <label>Usuario</label>
-                <input type="username" v-model="username">
-                <label>Password</label>
-                <input type="password" v-model="password">
-                <label>Email</label>
-                <input type="email" v-model="email">
-                <label>Telefono</label>
-                <input type="phone" v-model="phone">
-                <label>Sitio Web</label>
-                <input type="website" v-model="website">
-                <br>
-                <button @click="guardar_edicion">Guardar</button>
-            </form>
-
-
         </div>
         <script type="text/javascript">
             const { createApp } = Vue
@@ -119,58 +40,44 @@
             createApp({
                 data(){
                     return {
-                        users:[],
-                        name: '',
-                        username: '',
-                        password: '',
-                        email: '',
-                        phone: '',
-                        website: '',
-                        id: 1,
-                        mostrar_tabla: true,
-                        mostrar_form1:false,
-                        mostrar_form2:false,
-                        userIndex: null
+                        peliculas:[],
+                        number: null,
                     }
                 },
                 methods:{
                     add(e){
-                        this.id = contador;
-                        this.users.push({id: this.id, name: this.name,username: this.username,password: this.password, email: this.email, phone: this.phone, website: this.website});
-                        contador++;
-                        var access=this.users.map(function(u){})
-                        alert("Usuario Guardado")
-                        this.mostrar_tabla = true;
-                        this.mostrar_form1 = false;
-                    },
-                    mostrar_formulario_agregar(){
-                        this.mostrar_tabla = false;
-                        this.mostrar_form1 = true;
-                    },
-                    eliminar(index){
-                        this.users.splice(index, 1);
-                        alert("Usuario Eliminado")
+                        var data = new FormData();
+
+                        var config = {
+                        method: 'get',
+                        url: 'https://api.themoviedb.org/3/movie/top_rated?api_key=8cd7f318b7ed0aaaa8cc4e5a705e15e4',
+                        headers: { 
+
+                        },
+                        data : data
+                        };
+                        var var1 = this;
+                        axios(config)
+                        .then(function (response) {
+                        console.log(JSON.stringify(response.data));
+                        var1.peliculas=response.data.results;
+                        })
+                        .catch(function (error) {
+                        console.log(error);
+                        });
 
                     },
-                    mostrar_formulario_editar(index){
-                        userIndex = index;
-                        this.mostrar_tabla = false;
-                        this.mostrar_form2 = true;
+                    puntuar(){
+
                     },
-                    guardar_edicion(index){
-                        this.id=userIndex+1;
-                        this.users[index] = {id: this.id, name: this.name,username: this.username,password: this.password, email: this.email, phone: this.phone, website: this.website};
-                        this.mostrar_tabla = true;
-                        this.mostrar_form2 = false;
-                        alert("Datos del Usuario Editados")
-                    }
+                    acceder_detalles(e){
+                        localStorage.setItem("Movie", JSON.stringify(e))
+                        window.location.href = "detalles.html";
+                    },
                     
                 },
                 mounted() {
-                    fetch('users.json')
-                    .then((res) => res.json())
-                    .then((json) => (this.users = json))
-                    .catch((err) => console.log(err))
+
                 },
             }).mount('#contenedor')
 
