@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            vue js
+        </title>
+        <STyle type="text/css">
+                
+        </STyle>
+        <script src="https://unpkg.com/vue@3"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div id="contenedor">
+                <h2>
+                    Peliculas Top Rating
+                </h2>
+                <br>
+                <h3>Bienvenido: </h3>
+                <ul>
+                    <li v-for="item in peliculas">
+                        <h3>{{item.original_title}}</h3>
+                        <br>
+                        <img :src="'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/'+item.poster_path">
+                        <br>
+                        <button @click="acceder_detalles(item)">Detalles</button>
+                        
+
+                        <br>
+                    </li>
+                    <br>
+                </ul>
+                <br>
+                <button @click="add">Mostrar Lista de Peliculas</button>
+                <br>
+        </div>
+        <script type="text/javascript">
+            const { createApp } = Vue
+            var contador = 11;
+            createApp({
+                data(){
+                    return {
+                        peliculas:[],
+                        number: null,
+                    }
+                },
+                methods:{
+                    add(e){
+                        var data = new FormData();
+
+                        var config = {
+                        method: 'get',
+                        url: 'https://api.themoviedb.org/3/movie/top_rated?api_key=8cd7f318b7ed0aaaa8cc4e5a705e15e4',
+                        headers: { 
+
+                        },
+                        data : data
+                        };
+                        var var1 = this;
+                        axios(config)
+                        .then(function (response) {
+                        console.log(JSON.stringify(response.data));
+                        var1.peliculas=response.data.results;
+                        })
+                        .catch(function (error) {
+                        console.log(error);
+                        });
+
+                    },
+                    puntuar(){
+
+                    },
+                    acceder_detalles(e){
+                        localStorage.setItem("Movie", JSON.stringify(e))
+                        window.location.href = "detalles.html";
+                    },
+                    
+                },
+                mounted() {
+
+                },
+            }).mount('#contenedor')
+
+
+        </script>
+    </body>
+</html>
