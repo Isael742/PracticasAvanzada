@@ -16,7 +16,7 @@
                         Datos de acceso
                     </legend>
         <div class="d-flex justify-content-md-center">
-            <form class="form">
+            <form class="form" method="POST" >
                 <fieldset>
                     <br>
                     <label>
@@ -24,7 +24,7 @@
                     </label>
                     <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="email" class="form-control" placeholder="username@fakemail.com" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="email" name="email" class="form-control" placeholder="username@fakemail.com" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
 
                     <label>
@@ -32,7 +32,7 @@
                     </label>
                     <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">*</span>
-                    <input type="password" class="form-control" placeholder="* * * * * * " aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="password" name="password" class="form-control" placeholder="* * * * * * " aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                     <a>
                     <button type="submit" class="btn btn-primary" >Submit</button>

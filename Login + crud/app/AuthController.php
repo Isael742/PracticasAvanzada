@@ -38,10 +38,22 @@ Class AuthController{
         ));
 
         $response = curl_exec($curl);
+        curl_close($curl);
         $response = json_decode($response);
 
         if (isset($response->code) && $response) {
-            # code...
+            session_start();
+
+            $_SESSION['name'] = $response->data->name;
+            $_SESSION['lastname'] = $response->data->lastname;
+            $_SESSION['avatar'] = $response->data->avatar;
+            $_SESSION['token'] = $response->data->token;
+
+
+            header("Location:../productos")
+        }else{
+            #var_dump($response);
+            header("Location:../?error=true")
         }
 
         curl_close($curl);
