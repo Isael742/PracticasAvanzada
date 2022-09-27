@@ -34,8 +34,9 @@
                     <span class="input-group-text" id="basic-addon1">*</span>
                     <input type="password" class="form-control" placeholder="* * * * * * " aria-label="Username" aria-describedby="basic-addon1">
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a>
+                    <button type="submit" class="btn btn-primary" >Submit</button>
+                    </a>
                 </fieldset>
             </form>
         </div>
