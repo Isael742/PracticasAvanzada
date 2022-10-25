@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,14 @@ Route::get('users/{id}', [UserController::class, 'show']);
 
 Route::post('users/', [UserController::class, 'store']);
 
+
+//Clientes Controladores
+Route::get('clients/', [CLientController::class, 'index']);
+
+Route::get('clients/{id}', [CLientController::class, 'show']);
+
+
+/*
 Route::get('saludo/{name}',function($name){
     echo "HOLA ".$name;
 });
@@ -38,3 +47,4 @@ Route::get('suma/{num1}/{num2}/{num3?}',function($num1,$num2,$num3=0){
 Route::post('suma/',function(Request $request){
     echo $num1 + $num2 + $num3;
 }) -> where(['num1'=> '[0-9]+','num2'=> '[0-9]+']);
+*/
