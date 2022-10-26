@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,11 @@ Route::post('users/', [UserController::class, 'store']);
 Route::get('clients/', [CLientController::class, 'index']);
 
 Route::get('clients/{id}', [CLientController::class, 'show']);
+
+//Reservaciones
+Route::get('reservations/', [ReservationController::class, 'index']);
+
+Route::get('reservations/{id}', [ReservationController::class, 'show']);
 
 
 /*
