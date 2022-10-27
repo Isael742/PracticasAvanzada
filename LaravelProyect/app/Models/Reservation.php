@@ -10,11 +10,16 @@ class Reservation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre',
+        'client_id',
         'ciudad',
         'num_cuarto',
         'num_personas',
         'fecha_llegada',
         'fecha_salida',
     ];
+
+    public function client(){
+        return $this->BelongsTo(Client::class);
+    }
 }
+

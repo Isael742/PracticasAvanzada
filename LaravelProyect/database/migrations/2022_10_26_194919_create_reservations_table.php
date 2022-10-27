@@ -16,12 +16,14 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nombre');
+            $table->unsignedBigInteger('client_id');
             $table->string('ciudad');
             $table->string('num_cuarto');
             $table->string('num_personas');
             $table->string('fecha_llegada');
             $table->string('fecha_salida');
+
+            $table->foreign('client_id')->references('id')->on('clients');
 
             $table->timestamps();
         });
