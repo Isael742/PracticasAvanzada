@@ -15,7 +15,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return Client::with('reservations')->get();
+        $clients = Client::with('reservations')->get();
+
+        return view('show_clients', compact('clients'));
     }
 
     /**
@@ -68,9 +70,11 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $client)
+    public function edit($id)
     {
-        //
+        $client = Client::with('reservations')->find($id);
+
+        return view('update_client', compact('client'));
     }
 
     /**
@@ -80,9 +84,13 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request)
     {
-        //
+        $client = Client::find($request->id);
+        
+        $client->update($request->all());
+
+        return $client;
     }
 
     /**
