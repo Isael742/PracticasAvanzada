@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+
 use Illuminate\Http\Request;
+use App\Models\Client;
 
 class ClientController extends Controller
 {
@@ -24,7 +25,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('create_client');
     }
 
     /**
@@ -35,7 +36,19 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = Client::create($request->all());
+
+        return $client;
+
+        /*
+        $client = new Client();
+        $client->name = $request -> name;
+        $client->email = $request -> email;
+        $client->phone = $request -> phone;
+
+        $client -> save();*/
+        
+
     }
 
     /**

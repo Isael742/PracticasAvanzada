@@ -30,9 +30,13 @@ Route::post('users/', [UserController::class, 'store']);
 
 
 //Clientes Controladores
-Route::get('clients/', [CLientController::class, 'index']);
+Route::get('clients/', [ClientController::class, 'index']);
 
-Route::get('clients/{id}', [CLientController::class, 'show']);
+Route::get('clients/{id}', [ClientController::class, 'show']);
+
+Route::get('clients/create', [ClientController::class, 'create']);
+
+Route::post('clients/', [ClientController::class, 'store']);
 
 //Reservaciones
 Route::get('reservations/', [ReservationController::class, 'index']);
